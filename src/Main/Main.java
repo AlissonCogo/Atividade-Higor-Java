@@ -53,13 +53,50 @@ public class Main {
                 case 5:
                     consultarProfessores(professores, contProfessores);
                     break;
+
                 case 6:
-                    deletarAluno(alunos, contAlunos);
-                    contAlunos--;
+                    /*deletarAluno(alunos, contAlunos);
+                    contAlunos--;*/
+
+                    String nome_aluno = JOptionPane.showInputDialog("Digite o nome do Aluno: ");
+                    int pos_aluno = -1;
+
+                    for (int i = 0; i < contAlunos; i++) {
+                        if (nome_aluno.equals(alunos[i].getNome())){
+                            pos_aluno = i;
+                        }
+                    }
+                    int resposta1 = JOptionPane.showConfirmDialog(null, "Voce tem certeza?");
+
+                    if(resposta1 == 0) {
+                        alunos[pos_aluno] = alunos[contAlunos-1];
+                        alunos[contAlunos-1] = null;
+                        contAlunos--;
+                        JOptionPane.showMessageDialog(null,"Aluno deletado com Sucesso!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "O Aluno não foi deletado!");
+                    }
                     break;
+
                 case 7:
-                    deletarProfessor(professores, contProfessores);
-                    contProfessores--;
+                    String nome_professor = JOptionPane.showInputDialog("Digite o nome do Professor: ");
+                    int pos_professor = -1;
+
+                    for (int i = 0; i < contAlunos; i++) {
+                        if (nome_professor.equals(alunos[i].getNome())){
+                            pos_professor = i;
+                        }
+                    }
+                    int resposta2 = JOptionPane.showConfirmDialog(null, "Voce tem certeza?");
+
+                    if(resposta2 == 0) {
+                        alunos[pos_professor] = alunos[contProfessores-1];
+                        alunos[contProfessores-1] = null;
+                        contProfessores--;
+                        JOptionPane.showMessageDialog(null,"Professor deletado com Sucesso!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "O Professor não foi deletado!");
+                    }
                     break;
                 case 8:
                     JOptionPane.showMessageDialog(null, "Encerrando...");
@@ -113,29 +150,4 @@ public class Main {
         JOptionPane.showMessageDialog(null, listaProfessores.toString());
     }
 
-    public static void deletarAluno(Aluno[] alunos, int contAlunos) {
-        String nome = JOptionPane.showInputDialog("Digite o nome do Aluno a ser deletado:");
-        for (int i = 0; i < contAlunos; i++) {
-            if (alunos[i].getNome().equalsIgnoreCase(nome)) {
-                alunos[i] = alunos[contAlunos -1];
-                alunos[contAlunos - 1] = null;
-                JOptionPane.showMessageDialog(null, "Aluno deletado com sucesso!");
-                return;
-            }
-        }
-        JOptionPane.showMessageDialog(null, "Aluno não encontrado!");
-    }
-
-    public static void deletarProfessor(Professor[] professores, int contProfessores) {
-        String nome = JOptionPane.showInputDialog("Digite o nome do Professor a ser deletado:");
-        for (int i = 0; i < contProfessores; i++) {
-            if (professores[i].getNome().equalsIgnoreCase(nome)) {
-                professores[i] = professores[contProfessores - 1];
-                professores[contProfessores - 1] = null;
-                JOptionPane.showMessageDialog(null, "Professor deletado com sucesso!");
-                return;
-            }
-        }
-        JOptionPane.showMessageDialog(null, "Professor não encontrado!");
-    }
 }
